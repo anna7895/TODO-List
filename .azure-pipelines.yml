@@ -12,21 +12,24 @@ steps:
 
   - script: echo "Running Some Build or Tests..."
     displayName: 'Run Build'
+    
+ - powershell: |
+      $smtpServer = "intrelay.allscripts.com"
+      $smtpPort = 587
+      $smtpUser = "anonymous"  # Replace with your email
+      $smtpPassword = " "  # Use secret variable for password
+      $from = "Ready-team@alterahealth.com"
+      $to = "<%=instance.createdByEmail%>"  # Replace with recipient email
+      $subject = "Azure DevOps Pipeline Status"
+      $body = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
 
-  - powershell: |
-  $MailServer = "intrelay.allscripts.com"
-  $User = "anonymous"
-  $From = "Ready-team@alterahealth.com"
-  $To = "<%=instance.createdByEmail%>"
-  $Subject = "Your pipeline is working"
-  $MailBody = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
       # Create SMTP client object
-      $smtp = New-Object System.Net.Mail.SmtpClient($MailServer, '587')
-      $smtp.Credentials = New-Object System.Net.NetworkCredential($User, " ")
+      $smtp = New-Object System.Net.Mail.SmtpClient($smtpServer, $smtpPort)
+      $smtp.Credentials = New-Object System.Net.NetworkCredential($smtpUser, $smtpPassword)
       $smtp.EnableSsl = $true
 
       # Create email message object
-      $message = New-Object System.Net.Mail.MailMessage($From, $To, $Subject, $MailBody)
+      $message = New-Object System.Net.Mail.MailMessage($from, $to, $subject, $body)
 
       # Send email
       $smtp.Send($message)
