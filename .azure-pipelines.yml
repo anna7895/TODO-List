@@ -15,8 +15,7 @@ steps:
 
   - powershell: |
 $User = 'anonymous'
-#$Pass = ConvertTo-SecureString –String " " –AsPlainText -Force
-#$Credential = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $User, $Pass
+
 $MailServer = "intrelay.allscripts.com"
 $From = "Ready-team@alterahealth.com"
 $To = "<%=instance.createdByEmail%>"
