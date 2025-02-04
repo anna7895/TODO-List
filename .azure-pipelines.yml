@@ -1,4 +1,26 @@
+trigger:
+  branches:
+    include:
+      - '*'  # Runs on every commit to any branch
+
+pool:
+  vmImage: 'windows-latest'  # Uses Microsoft-hosted agent
+
 steps:
-  - script: |
-      echo "The agent is running on: $(Agent.OS)"
-    displayName: 'Print Agent OS'
+  - script: echo "Starting Pipeline Execution"
+    displayName: 'Start Pipeline'
+
+  - script: echo "Running Some Build or Tests..."
+    displayName: 'Run Build'
+
+  - task: SendMail@1
+    inputs:
+      To: 'anna.leachovsky@alterahealth.com'  # Replace with your email
+      Subject: 'Azure DevOps Pipeline Status'
+      Body: 'Pipeline has completed execution. Check the results at $(Build.BuildUri)'
+      SmtpServer: 'intrelay.allscripts.com'  # Use your SMTP server
+      SmtpPort: 587
+      From: 'Ready-team@alterahealth.com'  # Replace with your sender email
+      Username: 'anonymous'
+      Password: ' '  # Store in Azure DevOps secrets
+
