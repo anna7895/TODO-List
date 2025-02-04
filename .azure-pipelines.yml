@@ -15,8 +15,8 @@ steps:
 
   - powershell: |
 $User = 'anonymous'
-$Pass = ConvertTo-SecureString –String " " –AsPlainText -Force
-$Credential = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $User, $Pass
+#$Pass = ConvertTo-SecureString –String " " –AsPlainText -Force
+#$Credential = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $User, $Pass
 $MailServer = "intrelay.allscripts.com"
 $From = "Ready-team@alterahealth.com"
 $To = "<%=instance.createdByEmail%>"
@@ -24,7 +24,7 @@ $Subject = "Your pipeline is working"
 $MailBody = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
       # Create SMTP client object
       $smtp = New-Object System.Net.Mail.SmtpClient($MailServer, '587')
-      $smtp.Credentials = New-Object System.Net.NetworkCredential($User, $Credential)
+      $smtp.Credentials = New-Object System.Net.NetworkCredential($User, " ")
       $smtp.EnableSsl = $true
 
       # Create email message object
