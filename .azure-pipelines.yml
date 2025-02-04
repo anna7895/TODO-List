@@ -4,7 +4,7 @@ trigger:
       - '*'  # Runs on every commit to any branch
 
 pool:
-  vmImage: 'ubuntu-latest'  # Uses Microsoft-hosted agent
+  vmImage: 'windows-latest'  # Uses Microsoft-hosted agent
 
 steps:
   - script: echo "Starting Pipeline Execution"
@@ -12,8 +12,8 @@ steps:
 
   - script: echo "Running Some Build or Tests..."
     displayName: 'Run Build'
-    
- - powershell: |
+
+  - powershell: |
       $smtpServer = "intrelay.allscripts.com"
       $smtpPort = 587
       $smtpUser = "anonymous"  # Replace with your email
