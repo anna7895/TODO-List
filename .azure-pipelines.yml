@@ -19,14 +19,13 @@ steps:
       $smtpUser = "anonymous"  # Replace with your email
       $smtpPassword = " "  # Use secret variable for password
       $from = "Ready-team@alterahealth.com"
-      $to = "<%=instance.createdByEmail%>"  # Replace with recipient email
+      $to = "anna.leachovsky@alterahealth.com"  # Replace with recipient email
       $subject = "Azure DevOps Pipeline Status"
       $body = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
 
       # Create SMTP client object
       $smtp = New-Object System.Net.Mail.SmtpClient($smtpServer, $smtpPort)
       $smtp.Credentials = New-Object System.Net.NetworkCredential($smtpUser, $smtpPassword)
-      $smtp.EnableSsl = $true
 
       # Create email message object
       $message = New-Object System.Net.Mail.MailMessage($from, $to, $subject, $body)
