@@ -1,1 +1,4 @@
-
+steps:
+  - script: |
+      echo "The agent is running on: $(Agent.OS)"
+    displayName: 'Print Agent OS'
