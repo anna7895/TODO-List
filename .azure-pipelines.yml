@@ -4,7 +4,7 @@ trigger:
       - '*'  # Runs on every commit to any branch
 
 pool:
-  vmImage: 'windows-latest'  # Uses Microsoft-hosted agent
+  name: 'dbMotion_Pool_Net6'
 
 steps:
   - script: echo "Starting Pipeline Execution"
