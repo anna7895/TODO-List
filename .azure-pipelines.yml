@@ -14,13 +14,12 @@ steps:
     displayName: 'Run Build'
 
   - powershell: |
-$User = 'anonymous'
-
-$MailServer = "intrelay.allscripts.com"
-$From = "Ready-team@alterahealth.com"
-$To = "<%=instance.createdByEmail%>"
-$Subject = "Your pipeline is working"
-$MailBody = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
+  $MailServer = "intrelay.allscripts.com"
+  $User = 'anonymous'
+  $From = "Ready-team@alterahealth.com"
+  $To = "<%=instance.createdByEmail%>"
+  $Subject = "Your pipeline is working"
+  $MailBody = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
       # Create SMTP client object
       $smtp = New-Object System.Net.Mail.SmtpClient($MailServer, '587')
       $smtp.Credentials = New-Object System.Net.NetworkCredential($User, " ")
