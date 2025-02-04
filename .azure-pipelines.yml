@@ -4,7 +4,7 @@ trigger:
       - '*'  # Runs on every commit to any branch
 
 pool:
-  vmImage: 'windows-latest'  # Uses Microsoft-hosted agent
+  vmImage: 'ubuntu-latest'  # Uses Microsoft-hosted agent
 
 steps:
   - script: echo "Starting Pipeline Execution"
@@ -13,7 +13,7 @@ steps:
   - script: echo "Running Some Build or Tests..."
     displayName: 'Run Build'
 
-- powershell: |
+  - powershell: |
 $User = 'anonymous'
 $Pass = ConvertTo-SecureString –String " " –AsPlainText -Force
 $Credential = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $User, $Pass
