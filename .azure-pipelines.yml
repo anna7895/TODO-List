@@ -24,3 +24,18 @@ steps:
       Username: 'anonymous'
       Password: ' '  # Store in Azure DevOps secrets
 
+- powershell: |
+$User = 'anonymous'
+$Pass = ConvertTo-SecureString –String " " –AsPlainText -Force
+$Credential = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $User, $Pass
+$MailServer = "intrelay.allscripts.com"
+$From = "Ready-team@alterahealth.com"
+$To = "<%=instance.createdByEmail%>"
+$Subject = "Your pipeline is working"
+$MailBody = @"
+<body style="font-family: Arial; font-size: 10pt;">  
+<p>Working!</p>
+</body> 
+"@
+Send-MailMessage -SmtpServer $MailServer -To $To -From $From -Subject $Subject -Body $MailBody -BodyAsHtml -Credential $Credential
+    displayName: 'Send Email Notification'
