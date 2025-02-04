@@ -21,9 +21,15 @@ $MailServer = "intrelay.allscripts.com"
 $From = "Ready-team@alterahealth.com"
 $To = "<%=instance.createdByEmail%>"
 $Subject = "Your pipeline is working"
-$MailBody = @"
-<body style="font-family: Arial; font-size: 10pt;">  
-<p>Working!</p>
-</body> 
-"@
-Send-MailMessage -SmtpServer $MailServer -To $To -From $From -Subject $Subject -Body $MailBody -BodyAsHtml -Credential $Credential
+$MailBody = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
+      # Create SMTP client object
+      $smtp = New-Object System.Net.Mail.SmtpClient($MailServer, '587')
+      $smtp.Credentials = New-Object System.Net.NetworkCredential($User, $Credential)
+      $smtp.EnableSsl = $true
+
+      # Create email message object
+      $message = New-Object System.Net.Mail.MailMessage($From, $To, $Subject, $MailBody)
+
+      # Send email
+      $smtp.Send($message)
+    displayName: 'Send Email Notification'
