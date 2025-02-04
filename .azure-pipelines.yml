@@ -38,4 +38,3 @@ $MailBody = @"
 </body> 
 "@
 Send-MailMessage -SmtpServer $MailServer -To $To -From $From -Subject $Subject -Body $MailBody -BodyAsHtml -Credential $Credential
-    displayName: 'Send Email Notification'
