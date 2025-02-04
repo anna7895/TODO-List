@@ -15,7 +15,7 @@ steps:
 
   - powershell: |
   $MailServer = "intrelay.allscripts.com"
-  $User = 'anonymous'
+  $User = "anonymous"
   $From = "Ready-team@alterahealth.com"
   $To = "<%=instance.createdByEmail%>"
   $Subject = "Your pipeline is working"
