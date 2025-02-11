@@ -10,9 +10,6 @@ steps:
   - script: echo "Starting Pipeline Execution"
     displayName: 'Start Pipeline'
 
-  - script: echo "Running on server: $(Agent.MachineName)"
-    displayName: 'Show Server Name'
-
   - powershell: |
       $folderPath = $(Build.ArtifactStagingDirectory) + "\AnnasTest"
       $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
