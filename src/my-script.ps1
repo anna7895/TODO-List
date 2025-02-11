@@ -7,6 +7,10 @@ $services = Get-Service | Sort-Object DisplayName
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
 $outputFile = "C:\Temp\AnnasTest\Services_ToDoList_$timestamp.html"
 
+# Read the color from the environment variable (default to green if not set)
+$runningColor = $env:RunningServiceColor
+if (-not $runningColor) { $runningColor = "#28a745" }  # Default green color
+
 # Start building the HTML
 $html = @"
 <!DOCTYPE html>
@@ -21,7 +25,7 @@ $html = @"
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #007bff; color: white; }
-        .running { background-color: #d4edda; color: #155724; }
+        .running { background-color: $runningColor; color: #155724; }
         .stopped { background-color: #f8d7da; color: #721c24; }
     </style>
 </head>
