@@ -6,9 +6,6 @@ trigger:
     include:
       - '*'  # Ensures that changes to any file, including .md files, trigger the pipeline
 
-variables:
-  RunningServiceColor: "#28a745"  # Default color (green)
-
 pool:
   name: 'dbMotion_Pool_Net6'
 
