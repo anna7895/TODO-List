@@ -14,13 +14,5 @@ steps:
       Write-Host "Running on server: $(Agent.MachineName)"
     displayName: "Show Server Name"
     
-  - powershell: |
-      $folderPath = "C:\Temp\AnnasTest\"
-      $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-      $filePath = "$folderPath\Run_$timestamp.txt"
-
-      # Create a new text file with the timestamp
-      "This file was created on: $timestamp" | Out-File -FilePath $filePath
-
-      Write-Host "File created: $filePath"
-    displayName: "Create Folder and Timestamped File"
+  - powershell: src/my-script.ps1
+    displayName: "Run Script from Repository"
