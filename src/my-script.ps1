@@ -1,4 +1,5 @@
 Write-Host "Fetching server services information..."
+Write-Host "Chosen color: $env:RunningServiceColor"
 
 # Get all services
 $services = Get-Service | Sort-Object DisplayName
