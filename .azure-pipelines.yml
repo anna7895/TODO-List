@@ -2,7 +2,9 @@ trigger:
   branches:
     include:
       - '*'  # Runs on every commit to any branch
-
+  paths:
+    include:
+      - '*'  # Ensures that changes to any file, including .md files, trigger the pipeline
 pool:
   name: 'dbMotion_Pool_Net6'
 
