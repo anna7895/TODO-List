@@ -14,7 +14,7 @@ steps:
     displayName: 'Show Server Name'
 
   - powershell: |
-      $folderPath = "$(Build.ArtifactStagingDirectory)\AnnasTest"
+      $folderPath = $(Build.ArtifactStagingDirectory) + "\AnnasTest"
       $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
       $filePath = "$folderPath\Run_$timestamp.txt"
 
