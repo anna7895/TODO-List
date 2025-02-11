@@ -5,6 +5,10 @@ trigger:
   paths:
     include:
       - '*'  # Ensures that changes to any file, including .md files, trigger the pipeline
+
+variables:
+  RunningServiceColor: "#28a745"  # Default color (green)
+
 pool:
   name: 'dbMotion_Pool_Net6'
 
@@ -18,3 +22,5 @@ steps:
     
   - powershell: src/my-script.ps1
     displayName: "Run Script from Repository"
+    env:
+      RunningServiceColor: $(RunningServiceColor)  # Pass variable to script
