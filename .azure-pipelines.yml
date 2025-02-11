@@ -10,26 +10,21 @@ steps:
   - script: echo "Starting Pipeline Execution"
     displayName: 'Start Pipeline'
 
-  - script: echo "Running Some Build or Tests..."
-    displayName: 'Run Build'
+  - script: echo "Running on server: $(Agent.MachineName)"
+    displayName: 'Show Server Name'
 
   - powershell: |
-      $smtpServer = "intrelay.allscripts.com"
-      $smtpPort = 587
-      $smtpUser = "anonymous"  # Replace with your email
-      $smtpPassword = " "  # Use secret variable for password
-      $from = "Ready-team@alterahealth.com"
-      $to = "anna.leachovsky@alterahealth.com"  # Replace with recipient email
-      $subject = "Azure DevOps Pipeline Status"
-      $body = "The pipeline has completed execution. View the details here: $(Build.BuildUri)"
+      $folderPath = "$(Build.ArtifactStagingDirectory)\AnnasTest"
+      $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+      $filePath = "$folderPath\Run_$timestamp.txt"
 
-      # Create SMTP client object
-      $smtp = New-Object System.Net.Mail.SmtpClient($smtpServer, $smtpPort)
-      $smtp.Credentials = New-Object System.Net.NetworkCredential($smtpUser, $smtpPassword)
+      # Create the folder if it doesn't exist
+      if (-Not (Test-Path $folderPath)) {
+          New-Item -ItemType Directory -Path $folderPath | Out-Null
+      }
 
-      # Create email message object
-      $message = New-Object System.Net.Mail.MailMessage($from, $to, $subject, $body)
+      # Create a new text file with the timestamp
+      "This file was created on: $timestamp" | Out-File -FilePath $filePath
 
-      # Send email
-      $smtp.Send($message)
-    displayName: 'Send Email Notification'
+      Write-Host "File created: $filePath"
+    displayName: "Create Folder and Timestamped File"
