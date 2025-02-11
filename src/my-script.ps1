@@ -5,7 +5,7 @@ $services = Get-Service | Sort-Object DisplayName
 
 # Get timestamp
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-$outputFile = "C:\Temp\AnnasTest\Services_ToDoList_$timestamp.txt"
+$outputFile = "C:\Temp\AnnasTest\Services_ToDoList_$timestamp.html"
 
 # Start building the HTML
 $html = @"
